@@ -13,10 +13,9 @@ import { Observable } from 'rxjs/Observable'
   template: 
   `
   <div *ngIf="(streamer$)">
-  <p>streamer exists</p>
   		<div id="stream-info">
   			<a href="{{streamer$.url}}" id="link">
-  				<div id="status"></div>
+          <div id="status" [class]="streamer$.game ? 'online' : 'offline'"></div>
     				<div id="text">
       				<h1 id="name">{{streamer$.name}}</h1>
       				<h2 id="activity-name">{{streamer$.game}}</h2>
@@ -32,14 +31,14 @@ import { Observable } from 'rxjs/Observable'
 export class StreamerDetailComponent implements OnInit {
 
   @Input() name: string;
-  //streamer$: Observable<any>;
   streamer$: any;
 
   constructor(private statusService: StatusService) {}
 
   ngOnInit() {
-    console.log(this.name);
-    //this.streamer$ = this.statusService.getStatus(this.name);
+    //get streamer data
     this.statusService.getStatus(this.name).subscribe(e => this.streamer$ = e);
   }
 }
+
+//<div id="status" [class.offline]="streamer$.game"></div>
