@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { StreamerDetailComponent } from './components/streamerDetail/streamerDetail.component';
+import { ListComponent } from './container/list/list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StreamerDetailComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
