@@ -12,16 +12,16 @@ import { Observable } from 'rxjs/Observable'
   selector: 'streamer-detail',
   template: 
   `
-  {{(streamer | async)?.name}}
-  <div *ngIf="streamer | async">
+  <div *ngIf="(streamer$)">
+  <p>streamer exists</p>
   		<div id="stream-info">
-  			<a href="{{streamer.url}}" id="link">
-  				<div id="status">{{streamer.status}}</div>
+  			<a href="{{streamer$.url}}" id="link">
+  				<div id="status"></div>
     				<div id="text">
-      				<h1 id="name">{{streamer.name}}</h1>
-      				<h2 id="activity-name">{{streamer.game}}</h2>
+      				<h1 id="name">{{streamer$.name}}</h1>
+      				<h2 id="activity-name">{{streamer$.game}}</h2>
     			</div>
-  				<img src="http://placehold.it/100x100" id="avatar">
+  				<img src="{{streamer$.logo}}" id="avatar">
   			</a>
 		</div>
   </div>
@@ -32,15 +32,14 @@ import { Observable } from 'rxjs/Observable'
 export class StreamerDetailComponent implements OnInit {
 
   @Input() name: string;
-  streamer: Observable<any>;
+  //streamer$: Observable<any>;
+  streamer$: any;
 
   constructor(private statusService: StatusService) {}
 
   ngOnInit() {
     console.log(this.name);
-    this.streamer = this.statusService.getStatus(this.name);
+    //this.streamer$ = this.statusService.getStatus(this.name);
+    this.statusService.getStatus(this.name).subscribe(e => this.streamer$ = e);
   }
 }
-
-
-// => check if streamer object is available, then draw

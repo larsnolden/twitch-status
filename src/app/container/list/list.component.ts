@@ -17,7 +17,7 @@ import { StreamerDetailComponent} from '../../components/streamerDetail/streamer
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  streamerList = ['ikealampe'];
+  streamerList = ['ikealampe', 'bonjwa'];
   
   constructor() {}
 
