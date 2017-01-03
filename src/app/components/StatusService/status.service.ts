@@ -8,14 +8,20 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class StatusService {
-  private twitchUrl = 'https://api.twitch.tv/kraken/channels/';
+  private channelUrl = 'https://api.twitch.tv/kraken/channels/';
+  private streamsUrl = 'https://api.twitch.tv/kraken/streams/';
   private options = new RequestOptions({headers: new Headers({'Client-ID': 'e0p8ccke9zke6d09tb4kjqsi8abo39'})});
 
   constructor(private http: Http) {}
   
 
-  getStatus(username: string): Observable<any> {
-    let url = this.twitchUrl + username;
+  getStream(username: string): Observable<any> {
+    let url = this.streamsUrl + username;
+  	return this.http.get(url, this.options).map(response => response.json());
+  }
+
+  getChannel(username: string): Observable<any> {
+      let url = this.channelUrl + username;
   	return this.http.get(url, this.options).map(response => response.json());
   }
 }
